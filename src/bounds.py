@@ -4,6 +4,7 @@ Module for experimenting with lower and upper bounds.
 Unlike in the BED functionality, where we need to search for a lower bound in
 a list of features, here we only concern ourselves with lists of integers.
 """
+
 def lower_bound(x: list[int], v: int) -> int:
     """Get the index of the lower bound of v in x.
 
@@ -23,7 +24,8 @@ def lower_bound(x: list[int], v: int) -> int:
             low = mid + 1
         else:
             high = mid - 1
-
+    if found == None:
+        return len(x)
     return found
 
 
@@ -47,4 +49,6 @@ def upper_bound(x: list[int], v: int) -> int:
         else:
             high = mid - 1
 
+    if found == None:
+        return len(x)
     return found
