@@ -11,11 +11,8 @@ def lower_bound(x: list[int], v: int) -> int:
     If all values in x are smaller than v, return len(x).
     """
 
-    if x[-1] < v:
-        return len(x)
-
     low, high = 0, len(x) - 1
-    found = None
+    found = len(x)
     while low <= high:
         mid = (low + high) // 2
         if x[mid] == v:
@@ -24,8 +21,7 @@ def lower_bound(x: list[int], v: int) -> int:
             low = mid + 1
         else:
             high = mid - 1
-    if found == None:
-        return len(x)
+
     return found
 
 
@@ -35,11 +31,8 @@ def upper_bound(x: list[int], v: int) -> int:
     If all values in x are smaller than v, return len(x).
     """
 
-    if x[-1] < v:
-        return len(x)
-
     low, high = 0, len(x) - 1
-    found = None
+    found = len(x)
     while low <= high:
         mid = (low + high) // 2
         if x[mid] == v:
@@ -49,6 +42,4 @@ def upper_bound(x: list[int], v: int) -> int:
         else:
             high = mid - 1
 
-    if found == None:
-        return len(x)
     return found
