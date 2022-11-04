@@ -3,6 +3,7 @@
 import argparse  # we use this module for option parsing. See main for details.
 
 import sys
+from operator import attrgetter # This module is used in sorting tables
 from typing import TextIO
 from bed import (
     read_bed_file, print_line, Table
@@ -14,8 +15,8 @@ def sort_file(table: Table) -> None:
     for chrom, features in table.items():
         # Here we iterate through all the chromosomes in the file.
         # You need to sort `features` with respect to chrom_start
-        # and then updatte the table
-        # FIXME: sort `features`
+        # and then update the table
+        features = sorted(features, key = attrgetter("chrom_start"))
         table[chrom] = features  # features should be sorted here
 
 
@@ -52,3 +53,5 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
+

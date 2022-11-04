@@ -60,7 +60,13 @@ Once you have implemented a lower bound search for the start of the range, imple
 
 *How do you use binary search to find the lower bound of a number? How did you have to modify the binary search algorithm?*
 
+The binary search algorithm splits the list we search into two parts by finding the middle value. If the middle value is lower than then entry we're searching for, it 'selects' the interval from the middle entry + 1 to the end of the list. This process is done recursively, each time shrinking the interval by half. Normally, once the entry being searched for is found, the process is stopped - here we need to continue shrinking the interval until the first entry of our search terms is located, which is done by continuously moving the upper limit of the interval down until it overlaps with the lower limit, meaning we've found the first entry of the search term.
+
+
 *Would anything be more difficult if the features covered ranges instead of single nucleotides (like real BED files)? What could go wrong, if anything?*
+
+Most notably, the sorting would have to be done differently than it is currently. In its current form, sorting is done simply by looking at the starting position - since no feature spans more than one nucleotide, overlaps aren't an issue. If features instead covered different ranges, we would have to make decisions regarding how we would like to sort them if we find overlapping features.
 
 *We wrote a tool for merging two BED files, but what if we had a bunch of them? What would the complexity be if we merged them in, one at a time? What would the complexity be if we merged all of the files at the same time?*
 
+Our current tool is merging two files in O(m+n); merging multiple files, one at a time, would instead be of complexity $O(\prod_{i=1}^{n} x_i)$, since we for every new list we want to add to the merged list, have to run through both the merged list and the list to be added. Merging them all at the same time, which is essentially what we do with the current tool (albeit only with two lists) would instead only take $O(\sum_{i=1}^{n} x_i)$ since we only move through each list once.
