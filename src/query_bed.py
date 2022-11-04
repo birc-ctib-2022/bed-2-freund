@@ -15,7 +15,13 @@ def extract_region(features: list[BedLine],
     chr_list = []
     for i in features:
         chr_list.append(i.chrom_start)
-    return(features[lower_bound(chr_list, start):upper_bound(chr_list, end)])
+
+    extract = []
+    lwb = lower_bound(chr_list, start)
+    upb = lower_bound(chr_list, end)
+    extract.extend(features[lwb:upb])
+
+    return extract
 
 
 
